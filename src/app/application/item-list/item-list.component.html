@@ -1,0 +1,88 @@
+<div class="container">
+  <h2>Shopping Items</h2>
+
+  <!-- Tab Navigation -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'getItem'" (click)="activeTab = 'getItem'">Get Item by ID</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'filter'" (click)="activeTab = 'filter'">Filter Items</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'men'" (click)="activeTab = 'men'">Men</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'women'" (click)="activeTab = 'women'">Women</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'shoes'" (click)="activeTab = 'shoes'">Shoes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'jewels'" (click)="activeTab = 'jewels'">Jewels</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'other'" (click)="activeTab = 'other'">Other</a>
+    </li>
+  </ul>
+
+  <!-- Get Item by ID Tab -->
+  <div *ngIf="activeTab === 'getItem'">
+    <div>
+      <label for="itemId">Get Item by ID:</label>
+      <input type="number" [(ngModel)]="itemId" />
+      <button (click)="getItemById()">Get Item</button>
+    </div>
+  </div>
+
+  <!-- Filter Items Tab -->
+  <div *ngIf="activeTab === 'filter'">
+    <h3>Filter Items</h3>
+
+    <!-- Filter by Category -->
+    <div>
+      <label for="category">Select by Category:</label>
+      <select [(ngModel)]="selectedCategory">
+        <option value="clothing">Clothing</option>
+        <option value="footwear">Footwear</option>
+        <option value="accessories">Accessories</option>
+      </select>
+      <button (click)="filterByCategory()">Filter</button>
+    </div>
+
+    <!-- Filter by Gender -->
+    <div>
+      <label for="gender">Select by Gender:</label>
+      <select [(ngModel)]="selectedGender">
+        <option value="men">Men</option>
+        <option value="women">Women</option>
+      </select>
+      <button (click)="filterByGender()">Filter</button>
+    </div>
+
+    <!-- Filter by Price -->
+    <div>
+      <label for="price">Select by Price Range:</label>
+      <input type="number" [(ngModel)]="minPrice" placeholder="Min Price" />
+      <input type="number" [(ngModel)]="maxPrice" placeholder="Max Price" />
+      <button (click)="filterByPrice()">Filter</button>
+    </div>
+
+    <!-- Display filtered results -->
+    <div *ngIf="filteredItems.length > 0">
+      <h3>Filtered Items</h3>
+      <ul>
+        <li *ngFor="let filteredItem of filteredItems">
+          <p><strong>Name:</strong> {{ filteredItem.name }}</p>
+          <p><strong>Size:</strong> {{ filteredItem.size }}</p>
+          <p><strong>Price:</strong> ${{ filteredItem.price }}</p>
+          <p><strong>Category:</strong> {{ filteredItem.category }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<app-filter-items [item]="item"></app-filter-items>
+
