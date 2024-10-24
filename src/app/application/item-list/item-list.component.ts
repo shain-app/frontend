@@ -3,13 +3,13 @@ import { Item } from '../../model/Item';
 import { ItemService } from '../../service/item.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {NgIf} from '@angular/common';
+import {NgFor, NgIf} from '@angular/common';
 import {FilterItemsComponent} from '../filter-items/filter-items.component';
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, NgIf, FilterItemsComponent],
+  imports: [FormsModule, HttpClientModule, NgIf, NgFor, FilterItemsComponent],
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css'],
   providers: [ItemService, FilterItemsComponent]
